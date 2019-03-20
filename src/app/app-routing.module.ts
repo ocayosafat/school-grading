@@ -4,16 +4,68 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'students',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: 'students',
+    children: [
+      {
+        path: '',
+        loadChildren: './students/students.module#StudentsPageModule'
+      },
+      {
+        path: 'new',
+        loadChildren: './students/new-student/new-student.module#NewStudentPageModule'
+      },
+      {
+        path: ':studentId',
+        children: [
+          {
+            path: '',
+            loadChildren: './students/student-detail/student-detail.module#StudentDetailPageModule'
+          },
+          {
+            path: 'edit',
+            loadChildren: './students/student-detail/edit-student/edit-student.module#EditStudentPageModule'
+          },
+          {
+            path: 'new-mark',
+            loadChildren: './marks/new-mark/new-mark.module#NewMarkPageModule'
+          },
+          {
+            path: ':markId',
+            loadChildren: './marks/edit-mark/edit-mark.module#EditMarkPageModule'
+          }
+        ]
+      }
+    ]
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+    path: 'subjects',
+    children: [
+      {
+        path: '',
+        loadChildren: './subjects/subjects.module#SubjectsPageModule'
+      },
+      {
+        path: 'new',
+        loadChildren: './subjects/new-subject/new-subject.module#NewSubjectPageModule'
+      },
+      {
+        path: ':subjectId',
+        children: [
+          {
+            path: '',
+            loadChildren: './subjects/subject-detail/subject-detail.module#SubjectDetailPageModule'
+          },
+          {
+            path: 'edit',
+            loadChildren: './subjects/subject-detail/edit-subject/edit-subject.module#EditSubjectPageModule'
+          }
+        ]
+      }
+    ]
   }
 ];
 

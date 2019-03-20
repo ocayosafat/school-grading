@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Subjects
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" *ngIf="isLoading" text-center>
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+      <ion-col size-md="6" offset-md="3" *ngIf="!isLoading && subjects.length <= 0" text-center>
+        <p>You don't have any subjects</p>
+      </ion-col>
+      <ion-col size-md="6" offset-md="3" *ngIf="!isLoading && subjects.length > 0">
+        <ion-card *ngFor="let subject of subjects;" (click)="goToSubjectDetail(subject.id)" class="simple-box">
+          <ion-card-header>
+            <ion-card-subtitle>{{ subject.name }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    
+  <ion-button 
+    class="bottom-right-button" 
+    color="primary" 
+    shape="round" 
+    size="large"
+    (click)="addNewSubject()">Add a subject</ion-button>
+</ion-content>

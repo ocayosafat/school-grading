@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/subjects"></ion-back-button>
+      </ion-buttons>
+    <ion-title>{{ isLoading ? 'Loading...' : loadedSubject.name }}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="editSubject()">
+          <ion-icon name="create" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteSubject(loadedSubject.id)">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngIf="isLoading" text-center>
+      <ion-spinner color="primary"></ion-spinner>
+    </div>
+    <ion-grid *ngIf="!isLoading">
+        <ion-row>
+          <ion-col>
+            <h1 text-center>{{ loadedSubject.name }}</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <p>F: 0 - {{ loadedSubject.grade[3]-1 }}</p>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <p>D: {{ loadedSubject.grade[3] }} - {{ loadedSubject.grade[2]-1 }}</p>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <p>C: {{ loadedSubject.grade[2] }} - {{ loadedSubject.grade[1]-1 }}</p>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <p>B: {{ loadedSubject.grade[1] }} - {{ loadedSubject.grade[0]-1 }}</p>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+              <ion-list>
+                <ion-item>
+                  <p>A: {{ loadedSubject.grade[0] }} - 100</p>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

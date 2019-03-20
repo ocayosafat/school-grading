@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button [defaultHref]="'/students/' + studentId"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Edit {{ isLoading ? 'Loading...' : loadedStudent.firstname }} {{ isLoading ? '' : loadedStudent.lastname }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="isLoading" text-center>
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+    <form [formGroup]="form" *ngIf="!isLoading">
+        <ion-grid>
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="3">
+              <ion-item>
+                <ion-label position="floating">Firstname</ion-label>
+                <ion-input type="text" formControlName="firstname"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!form.get('firstname').valid && form.get('firstname').touched">
+            <ion-col size-sm="6" offset-sm="3">
+              <p>Firstname is required</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="3">
+              <ion-item>
+                <ion-label position="floating">Lastname</ion-label>
+                <ion-input type="text" formControlName="lastname"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!form.get('lastname').valid && form.get('lastname').touched">
+            <ion-col size-sm="6" offset-sm="3">
+              <p>Lastname is required</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="3">
+              <ion-item>
+                <ion-label position="floating">Class</ion-label>
+                <ion-input type="text" formControlName="classname"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!form.get('classname').valid && form.get('classname').touched">
+            <ion-col size-sm="6" offset-sm="3">
+              <p>Classname is required</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="3">
+              <ion-item>
+                <ion-label position="floating">Date of Birth</ion-label>
+                <ion-datetime display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY" formControlName="dob"></ion-datetime>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!form.get('dob').valid && form.get('dob').touched">
+            <ion-col size-sm="6" offset-sm="3">
+              <p>Date of Birth is required</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="3">
+              <ion-button shape="round" color="primary" (click)="onUpdateStudent()" expand="block" [disabled]="!form.valid">
+                Edit student
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+</ion-content>
